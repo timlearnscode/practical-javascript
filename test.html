@@ -4,21 +4,29 @@
 
 <body> 
     <script>
-        var todos = ['Item1', 'Item2', 'Item3']; 
+        var todos = [
+            {todoText: 'Item1', completed: false}, 
+            {todoText: 'Item2', completed: false}, 
+            {todoText: 'Item3', completed: false}
+        ]; 
 
         function add(todo) { 
-            todos.push(todo);
+            todos.push({todo, false});
             console.log(todos);
         }
         
-        function edit(position, newValue) { 
-            todos[position] = newValue; 
+        function edit(position, newText) { 
+            todos[position].todoText = newText; 
             console.log(todos); 
         }
 
         function remove(position) {
             todos.splice(position, 1); 
             console.log(todos); 
+        }
+
+        function toggle(position) { 
+            todos[position].completed = !todos[position].completed; 
         }
 
         // test somet htings lkjhlkjhlk
