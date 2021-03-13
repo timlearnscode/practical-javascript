@@ -1,6 +1,5 @@
 <head>
-
-
+    <title>Practical Javascript - Tim</title>
 </head>
 
 <body> 
@@ -15,6 +14,22 @@
 
         console.log(todos);
 
-    </script>
+        function add(todo) { 
+            todos.push(todo);
+            console.log(todos);
+        }
+        
+        function edit(position, changedTodo) { 
+            todos[position] = changedTodo; 
+            console.log(todos); 
+        }
 
+        function remove(position) {
+            todos.splice(position, 1); 
+            console.log(todos); 
+        }
+
+
+    </script>
 </body>
+
