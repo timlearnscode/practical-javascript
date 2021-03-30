@@ -5,33 +5,53 @@
 <body> 
     <button id='display-todos-button'>Display Todos</button>
     <button id='toggle-all-button'>Toggle All</button>
-    <button id='add-button'>Add Todo</button>
+    <button id='add-button'>Add</button>
     <input id='add-input'></input>
-    
-    <!-- <button id='remove-button' onclick="remove()">Remove Todo</button>
-    <button id='edit-button' onclick="edit()">Edit Todo</button> -->
+    <button id='edit-button'>Edit</button>
+    <input id='edit-position-input'></input>
+    <input id='edit-text-input'></input>
+    <button id='remove-button'>Remove</button>
+    <input id='remove-input'></input>
+    <button id='toggle-button'>Toggle</button>
+    <input id='toggle-input'></input>
+
+    <ul id='todos-ul'>
+    </ul>
+
 
     <script>
 
 
         var displayTodosButton = document.getElementById('display-todos-button'); 
         displayTodosButton.addEventListener('click', displayTodos); 
+        
         var toggleAllButton = document.getElementById('toggle-all-button'); 
         toggleAllButton.addEventListener('click', toggleAll); 
+
         var addButton = document.getElementById('add-button'); 
+        var addInput = document.getElementById('add-input'); 
         addButton.addEventListener('click', add); 
 
-        var addInput = document.getElementById('add-input'); 
+        var editButton = document.getElementById('edit-button'); 
         var editPositionInput = document.getElementById('edit-position-input'); 
         var editTextInput = document.getElementById('edit-text-input'); 
+        editButton.addEventListener('click', edit); 
 
-
+        var removeButton = document.getElementById('remove-button'); 
+        var removeInput = document.getElementById('remove-input'); 
+        removeButton.addEventListener('click', remove); 
+        
+        var toggleButton = document.getElementById('toggle-button'); 
+        var toggleInput = document.getElementById('toggle-input'); 
+        toggleButton.addEventListener('click', toggle); 
 
         var todos = [
-            {todoText: 'Item1', completed: false}, 
-            {todoText: 'Item2', completed: true}, 
-            {todoText: 'Item3', completed: false}
+            {todoText: 'Item1', completed: false,   todoLi: document.createElement('li')}, 
+            {todoText: 'Item2', completed: true,    todoLi: document.createElement('li')}, 
+            {todoText: 'Item3', completed: false,   todoLi: document.createElement('li')}
         ]; 
+
+
 
         // function add(newText) { 
         //     todos.push({todoText: newText, completed: false});
@@ -43,7 +63,7 @@
                 todoText: addInput.value, 
                 completed: false
             });
-            addInput.value = ""; 
+            addInput.value = ''; 
             displayTodos(); 
         }
         
@@ -51,27 +71,52 @@
         //     todos[position].todoText = newText; 
         //     displayTodos(); 
         // }
-        
+
         function edit() { 
-            todos[editPositionInput.value].todoText = editTextInput.value;
-            editPositionInput.value = ""; 
-            editTextInput.value = ""; 
+            var position = editPositionInput.value; 
+            var newText = editTextInput.value; 
+            todos[position].todoText = newText; 
+            editPositionInput.value = ''; 
+            editTextInput.value = ''; 
             displayTodos(); 
         }
 
-        function remove(position) {
+        // function remove(position) {
+        //     todos.splice(position, 1); 
+        //     displayTodos(); 
+        // }
+        function remove() {
+            position = removeInput.value; 
             todos.splice(position, 1); 
+            removeInput.value = ''; 
             displayTodos(); 
         }
 
-        function toggle(position) { 
+        // function toggle(position) { 
+        //     todos[position].completed = !todos[position].completed; 
+        //     displayTodos();
+        // }
+        function toggle(){ 
+            position = toggleInput.value; 
             todos[position].completed = !todos[position].completed; 
+            toggleInput.value = ''; 
             displayTodos();
         }
 
+        todosUl = document.getElementById('todos-ul'); 
         function displayTodos() {
+            todosUl.innerHTML = ''; 
+
             for (let i = 0; i < todos.length; i++) {
                 console.log(todos[i]);    
+            }
+
+            for (let i = 0; i < todos.length; i++) {
+                var todoLi = document.createElement('li'); 
+                todoLi.innerText = todos[i].todoText; 
+                todosUl.appendChild(todoLi);
+                // todosUl.appendChild('li', ) 
+                // add the li element as a property in the todo Object, so you can easily change its text?
             }
         }
 
