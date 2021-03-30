@@ -37,9 +37,9 @@
         var editTextInput = document.getElementById('edit-text-input'); 
         editButton.addEventListener('click', edit); 
 
-        var removeButton = document.getElementById('remove-button'); 
-        var removeInput = document.getElementById('remove-input'); 
-        removeButton.addEventListener('click', remove); 
+        // var removeButton = document.getElementById('remove-button'); 
+        // var removeInput = document.getElementById('remove-input'); 
+        // removeButton.addEventListener('click', remove); 
         
         var toggleButton = document.getElementById('toggle-button'); 
         var toggleInput = document.getElementById('toggle-input'); 
@@ -81,16 +81,16 @@
             displayTodos(); 
         }
 
-        // function remove(position) {
-        //     todos.splice(position, 1); 
-        //     displayTodos(); 
-        // }
-        function remove() {
-            position = removeInput.value; 
+        function remove(position) {
             todos.splice(position, 1); 
-            removeInput.value = ''; 
             displayTodos(); 
         }
+        // function remove() {
+        //     position = removeInput.value; 
+        //     todos.splice(position, 1); 
+        //     removeInput.value = ''; 
+        //     displayTodos(); 
+        // }
 
         // function toggle(position) { 
         //     todos[position].completed = !todos[position].completed; 
@@ -112,11 +112,14 @@
             }
 
             for (let i = 0; i < todos.length; i++) {
+                var completedText = (todos[i].completed) ? '[x] ' : '[ ] '; 
                 var todoLi = document.createElement('li'); 
-                todoLi.innerText = todos[i].todoText; 
+                todoLi.innerText = completedText + todos[i].todoText;
+                var removeButton = document.createElement('button'); 
+                removeButton.innerText = 'Remove'; 
+                removeButton.addEventListener('click', function(){remove(i)}); 
+                todoLi.appendChild(removeButton); 
                 todosUl.appendChild(todoLi);
-                // todosUl.appendChild('li', ) 
-                // add the li element as a property in the todo Object, so you can easily change its text?
             }
         }
 
