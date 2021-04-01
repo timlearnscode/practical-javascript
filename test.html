@@ -19,8 +19,30 @@
     </ul>
 
 
+    <!-- Testing delete after -->
+    <ul id=test-ul>
+        <li> <button>asdf</button></li>
+    </ul>
     <script>
-
+        /// TESTING DELETE AFTER 
+        testUl = document.getElementById('test-ul'); 
+        testUl.addEventListener('click', testUlClicked); 
+        // testLi = document.getElementById('test-li'); 
+        // testLi.addEventListener('click', testLiClicked);
+        function testUlClicked(event){
+            console.log("UL");
+            console.log("  currentTarget:");
+            console.log(event.currentTarget);
+            console.log("  target"); 
+            console.log(event.target); 
+        }
+        // function testLiClicked(event){
+        //     console.log("LI");
+        //     console.log("  currentTarget:");
+        //     console.log(event.currentTarget);
+        //     console.log("  target"); 
+        //     console.log(event.target); 
+        // }
 
         var displayTodosButton = document.getElementById('display-todos-button'); 
         displayTodosButton.addEventListener('click', displayTodos); 
@@ -44,6 +66,10 @@
         var toggleButton = document.getElementById('toggle-button'); 
         var toggleInput = document.getElementById('toggle-input'); 
         toggleButton.addEventListener('click', toggle); 
+
+
+
+
 
         var todos = [
             {todoText: 'Item1', completed: false,   todoLi: document.createElement('li')}, 
@@ -81,7 +107,18 @@
             displayTodos(); 
         }
 
-        function remove(position) {
+        // function remove(position) {
+        //     todos.splice(position, 1); 
+        //     displayTodos(); 
+        // }        
+        function remove(event) {
+            console.log(event);
+            // event.target; is the remove button
+            // event.target.id is the id of the remove button 
+            console.log(event.currentTarget); 
+            console.log(event.target);
+
+            position = event.currentTarget.id; 
             todos.splice(position, 1); 
             displayTodos(); 
         }
@@ -117,7 +154,9 @@
                 todoLi.innerText = completedText + todos[i].todoText;
                 var removeButton = document.createElement('button'); 
                 removeButton.innerText = 'Remove'; 
-                removeButton.addEventListener('click', function(){remove(i)}); 
+                removeButton.id = i; 
+                // removeButton.addEventListener('click', function(){remove(i)}); 
+                removeButton.addEventListener('click', remove); 
                 todoLi.appendChild(removeButton); 
                 todosUl.appendChild(todoLi);
             }
@@ -139,6 +178,9 @@
             displayTodos(); 
         }
 
+
+
+        displayTodos();
     </script>
 </body>
 
