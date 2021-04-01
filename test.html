@@ -18,31 +18,7 @@
     <ul id='todos-ul'>
     </ul>
 
-
-    <!-- Testing delete after -->
-    <ul id=test-ul>
-        <li> <button>asdf</button></li>
-    </ul>
     <script>
-        /// TESTING DELETE AFTER 
-        testUl = document.getElementById('test-ul'); 
-        testUl.addEventListener('click', testUlClicked); 
-        // testLi = document.getElementById('test-li'); 
-        // testLi.addEventListener('click', testLiClicked);
-        function testUlClicked(event){
-            console.log("UL");
-            console.log("  currentTarget:");
-            console.log(event.currentTarget);
-            console.log("  target"); 
-            console.log(event.target); 
-        }
-        // function testLiClicked(event){
-        //     console.log("LI");
-        //     console.log("  currentTarget:");
-        //     console.log(event.currentTarget);
-        //     console.log("  target"); 
-        //     console.log(event.target); 
-        // }
 
         var displayTodosButton = document.getElementById('display-todos-button'); 
         displayTodosButton.addEventListener('click', displayTodos); 
@@ -58,10 +34,6 @@
         var editPositionInput = document.getElementById('edit-position-input'); 
         var editTextInput = document.getElementById('edit-text-input'); 
         editButton.addEventListener('click', edit); 
-
-        // var removeButton = document.getElementById('remove-button'); 
-        // var removeInput = document.getElementById('remove-input'); 
-        // removeButton.addEventListener('click', remove); 
         
         var toggleButton = document.getElementById('toggle-button'); 
         var toggleInput = document.getElementById('toggle-input'); 
