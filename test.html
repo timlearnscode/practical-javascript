@@ -49,13 +49,6 @@
             {todoText: 'Item3', completed: false,   todoLi: document.createElement('li')}
         ]; 
 
-
-
-        // function add(newText) { 
-        //     todos.push({todoText: newText, completed: false});
-        //     displayTodos();
-        // }
-
         function add(){
             todos.push({
                 todoText: addInput.value, 
@@ -64,11 +57,6 @@
             addInput.value = ''; 
             displayTodos(); 
         }
-        
-        // function edit(position, newText) { 
-        //     todos[position].todoText = newText; 
-        //     displayTodos(); 
-        // }
 
         function edit() { 
             var position = editPositionInput.value; 
@@ -78,35 +66,15 @@
             editTextInput.value = ''; 
             displayTodos(); 
         }
-
-        // function remove(position) {
-        //     todos.splice(position, 1); 
-        //     displayTodos(); 
-        // }        
+   
         function remove(event) {
-            console.log(event);
-            // event.target; is the remove button
-            // event.target.id is the id of the remove button 
-            console.log(event.currentTarget); 
-            console.log(event.target);
-
             position = event.currentTarget.id; 
             todos.splice(position, 1); 
             displayTodos(); 
         }
-        // function remove() {
-        //     position = removeInput.value; 
-        //     todos.splice(position, 1); 
-        //     removeInput.value = ''; 
-        //     displayTodos(); 
-        // }
-
-        // function toggle(position) { 
-        //     todos[position].completed = !todos[position].completed; 
-        //     displayTodos();
-        // }
-        function toggle(){ 
-            position = toggleInput.value; 
+    
+        function toggle(event){ 
+            position = event.currentTarget.id; 
             todos[position].completed = !todos[position].completed; 
             toggleInput.value = ''; 
             displayTodos();
@@ -122,13 +90,17 @@
 
             for (let i = 0; i < todos.length; i++) {
                 var completedText = (todos[i].completed) ? '[x] ' : '[ ] '; 
+
                 var todoLi = document.createElement('li'); 
                 todoLi.innerText = completedText + todos[i].todoText;
+                todoLi.id = i; 
+                todoLi.addEventListener('click', toggle);
+
                 var removeButton = document.createElement('button'); 
                 removeButton.innerText = 'Remove'; 
                 removeButton.id = i; 
-                // removeButton.addEventListener('click', function(){remove(i)}); 
                 removeButton.addEventListener('click', remove); 
+
                 todoLi.appendChild(removeButton); 
                 todosUl.appendChild(todoLi);
             }
